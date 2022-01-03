@@ -1,0 +1,106 @@
+CREATE SCHEMA `PetDatabase` ;
+
+CREATE TABLE `PetDatabase`.`Employee` (
+  `employeeID` INT NOT NULL,
+  `address` VARCHAR(45) NULL,
+  `name` VARCHAR(45) NULL,
+  `email` VARCHAR(45) NULL,
+  `picture` VARCHAR(200) NULL,
+  `phoneNumber` VARCHAR(45) NULL,
+  PRIMARY KEY (`employeeID`));
+
+CREATE TABLE `PetDatabase`.`Pet` (
+  `petID` INT NOT NULL,
+  `customerID` INT NULL,
+  `picture` VARCHAR(200) NULL,
+  `name` VARCHAR(45) NULL,
+  `age` VARCHAR(45) NULL,
+  `breed` VARCHAR(45) NULL,
+  `type` VARCHAR(45) NULL,
+  `comments` VARCHAR(250) NULL,
+  PRIMARY KEY (`petID`));
+
+CREATE TABLE `PetDatabase`.`VetRecord` (
+  `recordID` INT NOT NULL,
+  `booleanRabies` VARCHAR(10) NULL,
+  `booleanBordetella` VARCHAR(10) NULL,
+  `booleanDP2` VARCHAR(10) NULL,
+  `certificatePDFs` VARCHAR(200) NULL,
+  `petID` VARCHAR(45) NULL,
+  PRIMARY KEY (`recordID`),
+  INDEX `petID_idx` (`petID` ASC) VISIBLE,
+  CONSTRAINT `petID`
+    FOREIGN KEY (`petID`)
+    REFERENCES `PetDatabase`.`Pet` (`picture`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+CREATE TABLE `PetDatabase`.`Customer` (
+  `customerID` INT NOT NULL,
+  `phoneNumber` VARCHAR(45) NULL,
+  `name` VARCHAR(45) NULL,
+  `picture` VARCHAR(200) NULL,
+  PRIMARY KEY (`customerID`));
+
+CREATE TABLE `PetDatabase`.`Appointment` (
+  `employeeID` INT NOT NULL,
+  `petID` INT NOT NULL,
+  `date` DATE NOT NULL,
+  `time` TIME NULL,
+  `comments` VARCHAR(250) NULL,
+  PRIMARY KEY (`employeeID`, `petID`, `date`));
+
+SET SQL_SAFE_UPDATES = 0;
+DELETE FROM PetDatabase.Employee;
+DELETE FROM PetDatabase.VetRecord;
+DELETE FROM PetDatabase.Pet;
+DELETE FROM PetDatabase.Customer;
+DELETE FROM PetDatabase.Appointment;
+
+INSERT INTO PetDatabase.Employee(employeeID,address,name,picture,email,phoneNumber)VALUES(1,'125 Hold Hill Lane Georgetown','Cindy Crawfard','C\user\somepath1','Ccraw@hotmail.com','356-344-3333');
+INSERT INTO PetDatabase.Employee(employeeID,address,name,picture,email,phoneNumber)VALUES(2,'67 West Mexico City South','Bison Tilly','C\user\somepath2','MallNinjaxx@aol.com','666-124-1212');
+INSERT INTO PetDatabase.Employee(employeeID,address,name,picture,email,phoneNumber)VALUES(3,'9950 Dreary Lane Kansas','Dick Steelum','C\user\somepath3','p0rt3rH0$3@yahoo.com','999-999-9999');
+
+INSERT INTO PetDatabase.Customer(customerID,phoneNumber,name,picture)VALUES(1, '777-347-9865','Heide Heineken','C\user\somepath4');
+INSERT INTO PetDatabase.Customer(customerID,phoneNumber,name,picture)VALUES(2, '356-327-6734','Dan Chowder','C\user\somepath5');
+INSERT INTO PetDatabase.Customer(customerID,phoneNumber,name,picture)VALUES(3, '896-342-8012','Alex Smith','C\user\somepath6');
+INSERT INTO PetDatabase.Customer(customerID,phoneNumber,name,picture)VALUES(4, '697-425-0923','Andy Churchhouse','C\user\somepath7');
+INSERT INTO PetDatabase.Customer(customerID,phoneNumber,name,picture)VALUES(5, '111-234-3456','Angela Grady','C\user\somepath8');
+INSERT INTO PetDatabase.Customer(customerID,phoneNumber,name,picture)VALUES(6, '678-623-7281','Stepheny Buchini','C\user\somepath9');
+INSERT INTO PetDatabase.Customer(customerID,phoneNumber,name,picture)VALUES(7, '735-214-3049','Michael Scott','C\user\somepath10');
+INSERT INTO PetDatabase.Customer(customerID,phoneNumber,name,picture)VALUES(8, '891-675-6073','Kurt Henkin','C\user\somepath11');
+INSERT INTO PetDatabase.Customer(customerID,phoneNumber,name,picture)VALUES(9, '992-092-6034','Lana DeMinko','C\user\somepath12');
+
+INSERT INTO PetDatabase.Pet(petID, customerID, picture, name, age, breed, type, comments)VALUES(1,1,'C\user\somepath13','Chichi','3','Labrador','Dog','No comment');
+INSERT INTO PetDatabase.Pet(petID, customerID, picture, name, age, breed, type, comments)VALUES(2,2,'C\user\somepath14','Gambit','1','Poodle','Dog','No comment');
+INSERT INTO PetDatabase.Pet(petID, customerID, picture, name, age, breed, type, comments)VALUES(3,3,'C\user\somepath15','Cookie','1','Labrador','Dog','Careful Around the Eyes');
+INSERT INTO PetDatabase.Pet(petID, customerID, picture, name, age, breed, type, comments)VALUES(4,4,'C\user\somepath16','Freya','2','Calico','Cat','No comment');
+INSERT INTO PetDatabase.Pet(petID, customerID, picture, name, age, breed, type, comments)VALUES(5,5,'C\user\somepath17','Gigi','4','Frenchie','Dog','Sweetheart, but timid');
+INSERT INTO PetDatabase.Pet(petID, customerID, picture, name, age, breed, type, comments)VALUES(6,6,'C\user\somepath18','Clementine','8','Corgi','Dog','No comment');
+INSERT INTO PetDatabase.Pet(petID, customerID, picture, name, age, breed, type, comments)VALUES(7,7,'C\user\somepath19','Derango','3','Persian','Dog','Tendency to get claws involved');
+INSERT INTO PetDatabase.Pet(petID, customerID, picture, name, age, breed, type, comments)VALUES(8,9,'C\user\somepath20','Janny','7','German Shepard','Dog','Likes to whine');
+INSERT INTO PetDatabase.Pet(petID, customerID, picture, name, age, breed, type, comments)VALUES(9,9,'C\user\somepath21','Mica','10','Labrador','Dog','No comment');
+INSERT INTO PetDatabase.Pet(petID, customerID, picture, name, age, breed, type, comments)VALUES(10,9,'C\user\somepath22','Sammy','1','Golden','Dog','High Energy, hard to control');
+
+INSERT INTO PetDatabase.VetRecord(recordID, petID, booleanRabies, booleanBordetella, booleanDP2, certificatePDFs)VALUES(1,10,'true','true','true','C\user\somepath23');
+INSERT INTO PetDatabase.VetRecord(recordID, petID, booleanRabies, booleanBordetella, booleanDP2, certificatePDFs)VALUES(2,9,'true','true','true','C\user\somepath24');
+INSERT INTO PetDatabase.VetRecord(recordID, petID, booleanRabies, booleanBordetella, booleanDP2, certificatePDFs)VALUES(3,8,'true','true','true','C\user\somepath25');
+INSERT INTO PetDatabase.VetRecord(recordID, petID, booleanRabies, booleanBordetella, booleanDP2, certificatePDFs)VALUES(4,7,'true','true','true','C\user\somepath26');
+INSERT INTO PetDatabase.VetRecord(recordID, petID, booleanRabies, booleanBordetella, booleanDP2, certificatePDFs)VALUES(5,6,'true','true','true','C\user\somepath27');
+INSERT INTO PetDatabase.VetRecord(recordID, petID, booleanRabies, booleanBordetella, booleanDP2, certificatePDFs)VALUES(6,5,'true','true','true','C\user\somepath28');
+INSERT INTO PetDatabase.VetRecord(recordID, petID, booleanRabies, booleanBordetella, booleanDP2, certificatePDFs)VALUES(7,4,'true','true','true','C\user\somepath29');
+INSERT INTO PetDatabase.VetRecord(recordID, petID, booleanRabies, booleanBordetella, booleanDP2, certificatePDFs)VALUES(8,3,'true','true','true','C\user\somepath30');
+INSERT INTO PetDatabase.VetRecord(recordID, petID, booleanRabies, booleanBordetella, booleanDP2, certificatePDFs)VALUES(9,2,'true','true','true','C\user\somepath31');
+INSERT INTO PetDatabase.VetRecord(recordID, petID, booleanRabies, booleanBordetella, booleanDP2, certificatePDFs)VALUES(10,1,'true','true','true','C\user\somepath32');
+
+INSERT INTO PetDatabase.Appointment(employeeID,petID,date,time,comments)VALUES(1,1,'2019-12-07','08:00:00','No comment');
+INSERT INTO PetDatabase.Appointment(employeeID,petID,date,time,comments)VALUES(1,2,'2019-12-07','09:00:00','Had a bit of a Hard Time Today');
+INSERT INTO PetDatabase.Appointment(employeeID,petID,date,time,comments)VALUES(2,3,'2019-12-07','08:00:00','No comment');
+INSERT INTO PetDatabase.Appointment(employeeID,petID,date,time,comments)VALUES(2,4,'2019-12-07','09:00:00','What a Great Groom');
+INSERT INTO PetDatabase.Appointment(employeeID,petID,date,time,comments)VALUES(3,5,'2019-12-07','08:00:00','Slight clip to skin, applied bandaid');
+INSERT INTO PetDatabase.Appointment(employeeID,petID,date,time,comments)VALUES(1,6,'2019-12-08','08:00:00','No comment');
+INSERT INTO PetDatabase.Appointment(employeeID,petID,date,time,comments)VALUES(1,7,'2019-12-08','09:00:00','No comment');
+INSERT INTO PetDatabase.Appointment(employeeID,petID,date,time,comments)VALUES(3,8,'2019-12-08','08:00:00','Behavior was bad during groom');
+INSERT INTO PetDatabase.Appointment(employeeID,petID,date,time,comments)VALUES(2,9,'2019-12-08','08:00:00','Did not behave well today, need to talk to owner');
+INSERT INTO PetDatabase.Appointment(employeeID,petID,date,time,comments)VALUES(3,10,'2019-12-08','09:00:00','No comment');
+
